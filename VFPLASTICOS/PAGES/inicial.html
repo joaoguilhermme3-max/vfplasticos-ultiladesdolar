@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VFPlásticos & Utilidades do Lar | Bem-vindo</title>
+  <meta name="description" content="Encontre utilidades domésticas, organizadores e descartáveis com preço de fábrica em Palmácia e região.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/inicial.css">
+  <link rel="icon" href="IMG/logo-vfplasticos.svg" type="image/svg+xml">
+</head>
+<body>
+  <main class="welcome-wrapper">
+    <div class="welcome-card">
+      <header class="welcome-header">
+        <div class="logo-hub">
+          <span class="logo-hub__marca">VF</span>
+          <h1 class="logo-hub__texto">VFPlásticos<small>Utilidades do Lar</small></h1>
+        </div>
+      </header>
+      
+      <section class="welcome-content">
+        <h2>Sua casa organizada e funcional.</h2>
+        <p>Preço justo, variedade e o melhor atendimento de Palmácia e região direto na sua tela.</p>
+        
+        <div class="hub-actions">
+          <a href="PAGES/principal.html" class="btn-hub btn-hub--primary">
+            Ver Ofertas e Catálogo
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="https://wa.me/5585900000000?text=Ol%C3%A1%21+Gostaria+de+tirar+uma+d%C3%BAvida." target="_blank" rel="noopener" class="btn-hub btn-hub--whatsapp">
+            Falar com Atendente
+          </a>
+        </div>
+      </section>
+
+      <footer class="welcome-footer">
+        <p>&copy; <span id="ano-atual"></span> VFPlásticos. Palmácia — CE.</p>
+      </footer>
+    </div>
+  </main>
+  <script>
+    document.getElementById('ano-atual').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
