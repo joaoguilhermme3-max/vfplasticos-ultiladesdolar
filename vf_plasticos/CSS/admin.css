@@ -1,0 +1,20 @@
+.abas{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.metricas{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;margin-bottom:1.2rem}
+.met{background:#fff;border:1px solid var(--linha);border-radius:14px;padding:1rem}
+.met span{font-size:.85rem;color:#5b6a93}.met strong{display:block;font-size:1.5rem}
+.met.dest{background:var(--azul);color:#fff}.met.dest span{color:#cfdcff}
+.painel{background:#fff;border:1px solid var(--linha);border-radius:14px;padding:1rem;margin-bottom:1rem}
+.barras{display:flex;gap:.6rem;align-items:flex-end;height:160px;margin-top:.8rem}
+.barras div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;font-size:.75rem;text-align:center}
+.barras i{display:block;width:100%;background:var(--laranja);border-radius:6px 6px 0 0;min-height:2px}
+.tabela{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th,td{padding:.55rem;border-bottom:1px solid var(--linha);text-align:left;vertical-align:middle}
+td input{width:95px}
+.baixo{background:#fff4ea}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.6rem;align-items:end}
+.form label{font-size:.82rem;font-weight:600;display:grid;gap:.2rem}
+.pedido{border:1px solid var(--linha);border-radius:12px;padding:.8rem;margin-bottom:.7rem;display:grid;gap:.3rem}
+.pedido header{all:unset;display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap;font-weight:700}
+.st{padding:.2rem .5rem;border-radius:8px;border:2px solid var(--linha)}
+.perigo{background:#fde8e8;color:var(--erro)}

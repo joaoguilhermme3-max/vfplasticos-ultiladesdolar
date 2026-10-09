@@ -1,0 +1,81 @@
+/* ===== VFPlásticos — estilos base da loja ===== */
+:root{--azul:#1747d6;--azul-esc:#0e2a85;--laranja:#ff7a1a;--tinta:#0e1b3d;--fundo:#f3f6fc;--linha:#dbe3f5;--suave:#5b6a93;--ok:#13875a;--erro:#c92a2a;--raio:16px}
+*{box-sizing:border-box;margin:0}
+body{font-family:'Bricolage Grotesque',system-ui,sans-serif;background:var(--fundo);color:var(--tinta);line-height:1.5;min-height:100vh;display:flex;flex-direction:column}
+main{flex:1;width:100%;max-width:1100px;margin:auto;padding:1.2rem 1rem 4rem}
+h1,h2,h3{line-height:1.15}
+a{color:var(--azul)}
+button,input,select{font:inherit}
+input,select{width:100%;padding:.6rem .75rem;border:2px solid var(--linha);border-radius:10px;background:#fff;color:var(--tinta)}
+:focus-visible{outline:3px solid var(--laranja);outline-offset:2px}
+.oculto{display:none!important}
+.vazio{padding:2rem;text-align:center;color:var(--suave)}
+
+/* ===== Botões ===== */
+button,a.btn,a.btn-or,a.btn-ghost{cursor:pointer;border:0;border-radius:10px;padding:.6rem 1rem;font-weight:600;display:inline-block;text-decoration:none;text-align:center}
+.btn{background:var(--azul);color:#fff}.btn:hover{background:var(--azul-esc)}
+.btn-or{background:var(--laranja);color:#fff}.btn-or:hover{filter:brightness(.92)}
+.btn-ghost{background:transparent;color:var(--azul);border:2px solid var(--azul)!important}
+.btn:disabled,.btn-or:disabled{background:#b9c3dc;cursor:not-allowed}
+
+/* ===== Cabeçalho e rodapé ===== */
+header{background:var(--azul);color:#fff;position:sticky;top:0;z-index:20}
+.topo{max-width:1100px;margin:auto;padding:.8rem 1rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.logo{font-weight:800;font-size:1.4rem;letter-spacing:-.5px;text-decoration:none;color:#fff}
+.logo b{color:var(--laranja)}
+.logo small{display:block;font-size:.7rem;font-weight:400;opacity:.85;letter-spacing:0}
+header nav{display:flex;gap:.3rem;flex-wrap:wrap;margin-left:auto}
+header nav a{color:#fff;text-decoration:none;padding:.5rem .8rem;border-radius:10px;font-weight:600}
+header nav a:hover,header nav a.on{background:#ffffff2e}
+footer{background:var(--tinta);color:#cfd8f0;text-align:center;padding:1.4rem 1rem;font-size:.9rem}
+footer a{color:var(--laranja)}
+
+/* ===== Página inicial ===== */
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:1.5rem;align-items:center;background:linear-gradient(135deg,var(--azul),var(--azul-esc));color:#fff;border-radius:22px;padding:2rem;border-bottom:6px solid var(--laranja)}
+.hero h1{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:800;letter-spacing:-1px}
+.hero p{opacity:.92;margin:.7rem 0 1.2rem;max-width:46ch}
+.acoes{display:flex;gap:.6rem;flex-wrap:wrap}
+.hero .btn-ghost{color:#fff;border-color:#ffffffaa!important}
+.arte{font-size:4.5rem;text-align:center;line-height:1.2;filter:drop-shadow(0 8px 12px #0004)}
+.secao{margin-top:2.2rem}
+.secao>h2{margin-bottom:1rem;font-size:1.5rem}
+.categorias{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem}
+.cat-card{background:#fff;border:1px solid var(--linha);border-radius:var(--raio);padding:1rem;text-align:center;text-decoration:none;color:var(--tinta);font-weight:700;transition:transform .15s,border-color .15s}
+.cat-card:hover{transform:translateY(-3px);border-color:var(--laranja)}
+.cat-card span{display:block;font-size:2.2rem}
+.passos{counter-reset:p;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;list-style:none;padding:0}
+.passos li{background:#fff;border:1px solid var(--linha);border-radius:var(--raio);padding:1rem 1rem 1rem 3.4rem;position:relative}
+.passos li::before{counter-increment:p;content:counter(p);position:absolute;left:1rem;top:1rem;width:1.8rem;height:1.8rem;border-radius:50%;background:var(--laranja);color:#fff;display:grid;place-items:center;font-weight:800}
+.passos b{display:block}
+.contato{background:var(--tinta);color:#fff;border-radius:22px;padding:1.5rem;display:flex;gap:1rem;justify-content:space-between;align-items:center;flex-wrap:wrap}
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding:1.4rem}.arte{display:none}}
+
+/* ===== Catálogo e produtos ===== */
+.chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.chip{background:#fff;border:2px solid var(--linha);color:var(--tinta);border-radius:99px}
+.chip.on{background:var(--tinta);border-color:var(--tinta);color:#fff}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1rem}
+.card{background:#fff;border-radius:var(--raio);border:1px solid var(--linha);overflow:hidden;display:flex;flex-direction:column}
+.card .img{background:#e6edfc;font-size:3.6rem;text-align:center;padding:1.2rem 0}
+.card .img img{max-width:100%;max-height:110px}
+.card .corpo{padding:.9rem;display:flex;flex-direction:column;gap:.3rem;flex:1}
+.card button{margin-top:auto}
+.cat{font-size:.8rem;color:var(--suave)}
+.preco{font-size:1.35rem;font-weight:800;color:var(--azul)}
+.aviso{font-size:.82rem;font-weight:600;color:var(--laranja)}
+.aviso.zero{color:var(--erro)}
+
+/* ===== Carrinho ===== */
+.dupla{display:grid;grid-template-columns:1fr 340px;gap:1.2rem;align-items:start;margin-top:1rem}
+.box{background:#fff;border:1px solid var(--linha);border-radius:var(--raio);padding:1rem;display:grid;gap:.7rem}
+.itens{display:flex;flex-direction:column;gap:.8rem}
+.item{display:flex;gap:.6rem;align-items:center;border-bottom:1px solid var(--linha);padding-bottom:.7rem}
+.item .nome{flex:1;font-weight:600}
+.qtd{display:flex;gap:.3rem;align-items:center}
+.qtd button{padding:.2rem .6rem;background:var(--fundo)}
+.total{display:flex;justify-content:space-between;font-size:1.2rem;font-weight:800}
+@media(max-width:800px){.dupla{grid-template-columns:1fr}}
+
+/* ===== Avisos ===== */
+#aviso{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:var(--tinta);color:#fff;padding:.7rem 1.1rem;border-radius:12px;z-index:50;display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}

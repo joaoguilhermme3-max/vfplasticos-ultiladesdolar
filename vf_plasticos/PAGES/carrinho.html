@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carrinho | VFPlásticos</title>
+<meta name="description" content="Finalize seu pedido pelo WhatsApp.">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../CSS/style.css">
+</head>
+<body data-raiz="../" data-pagina="carrinho">
+<main id="app">
+  <h1>Seu carrinho</h1>
+  <div class="dupla">
+    <div class="box"><div class="itens" id="itens"></div></div>
+    <aside class="box">
+      <div class="total"><span>Total</span><span id="total">R$ 0,00</span></div>
+      <input id="cNome" placeholder="Seu nome" autocomplete="name">
+      <input id="cTel" placeholder="WhatsApp com DDD" inputmode="tel" autocomplete="tel">
+      <select id="cEntrega" aria-label="Forma de recebimento"><option>Retirar na loja</option><option>Entrega</option></select>
+      <input id="cEnd" class="oculto" placeholder="Endereço de entrega" autocomplete="street-address">
+      <button class="btn-or" id="btnFinalizar">Enviar pedido pelo WhatsApp</button>
+    </aside>
+  </div>
+</main>
+<script src="../JS/dados.js"></script>
+<script src="../JS/layout.js"></script>
+<script src="../JS/loja.js"></script>
+</body>
+</html>

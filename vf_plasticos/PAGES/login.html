@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrar | Administração VFPlásticos</title>
+<meta name="robots" content="noindex,nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../CSS/style.css">
+<link rel="stylesheet" href="../CSS/login.css">
+</head>
+<body data-raiz="../" data-pagina="login" data-admin data-login>
+<main id="app" class="login-tela">
+  <section class="login-marca">
+    <div class="logo">VF<b>Plásticos</b><small>& Utilidades do Lar</small></div>
+    <p>Painel da loja: controle o estoque, acompanhe os pedidos e veja o faturamento.</p>
+    <ul><li>📦 Estoque em tempo real</li><li>🧾 Pedidos e situação de pagamento</li><li>📈 Faturamento por dia, semana e mês</li></ul>
+  </section>
+  <section class="login-form">
+    <form class="login-card" id="fLogin" novalidate>
+      <h1>Área do administrador</h1>
+      <label for="senha">Senha
+        <span class="campo"><input id="senha" type="password" autocomplete="current-password" required><button type="button" id="ver" aria-label="Mostrar ou ocultar a senha">Mostrar</button></span>
+      </label>
+      <p class="erro" id="erro" role="alert"></p>
+      <button class="btn" type="submit">Entrar</button>
+      <a class="voltar" href="../index.html">← Voltar para a loja</a>
+    </form>
+  </section>
+</main>
+<script src="../JS/dados.js"></script>
+<script src="../JS/layout.js"></script>
+<script src="../JS/admin.js"></script>
+</body>
+</html>
