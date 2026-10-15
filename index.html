@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VFPlásticos & Utilidades do Lar</title>
+<style>
+:root{--azul:#1456f0;--azul-esc:#0b2f8a;--laranja:#ff7a1a;--fundo:#f4f7ff;--card:#fff;--texto:#14213d;--suave:#5b6785;--borda:#dbe3f5;--ok:#0f9d58}
+*{box-sizing:border-box;margin:0}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--fundo);color:var(--texto);line-height:1.5}
+h1,h2,h3,button,input,select,label,.preco{font-family:'Trebuchet MS',Verdana,sans-serif}
+header{background:var(--azul);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:5}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Trebuchet MS',sans-serif;font-weight:800;font-size:1.15rem}
+.logo b{background:#fff;color:#d62828;border-radius:8px;padding:2px 9px}
+.logo small{display:block;font-weight:400;font-size:.75rem;opacity:.85}
+button{cursor:pointer;border:0;border-radius:8px;padding:10px 16px;font-size:.95rem;font-weight:700}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--laranja);outline-offset:2px}
+.btn-adm{background:rgba(255,255,255,.18);color:#fff}
+.btn-p{background:var(--laranja);color:#fff}
+.btn-s{background:#e6ecfb;color:var(--azul-esc)}
+.btn-d{background:#fde6e6;color:#b3261e}
+.hero{padding:44px 20px 28px;max-width:960px;margin:auto}
+.hero h1{font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.1;max-width:15ch}
+.hero p{color:var(--suave);margin-top:10px;max-width:52ch}
+main{max-width:1100px;margin:auto;padding:0 20px 60px}
+.filtros{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 20px}
+.filtros button{background:#e6ecfb;color:var(--azul-esc)}
+.filtros button.on{background:var(--azul);color:#fff}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+.prod{background:var(--card);border:1px solid var(--borda);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.foto{aspect-ratio:1/1;background:#e9efff;display:flex;align-items:center;justify-content:center;font-size:4rem}
+.foto img{width:100%;height:100%;object-fit:cover}
+.info{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.info h3{font-size:1rem}
+.cat{font-size:.8rem;color:var(--suave)}
+.preco{font-size:1.25rem;font-weight:800;color:var(--azul)}
+.info a{margin-top:auto;text-align:center;text-decoration:none;background:var(--laranja);color:#fff;padding:10px;border-radius:8px;font-family:'Trebuchet MS',sans-serif;font-weight:700}
+footer{background:var(--azul-esc);color:#cfd9f7;padding:26px 20px;text-align:center;font-size:.9rem}
+/* admin */
+.overlay{position:fixed;inset:0;background:rgba(10,20,50,.6);display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:20px;z-index:20}
+.overlay.on{display:flex}
+.modal{background:#fff;border-radius:16px;padding:22px;width:100%;max-width:760px;margin:auto}
+.modal.peq{max-width:360px}
+.topo{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.fat{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.fat div{background:var(--fundo);border:1px solid var(--borda);border-radius:12px;padding:14px}
+.fat span{font-family:'Trebuchet MS',sans-serif;font-size:.85rem;color:var(--suave)}
+.fat strong{display:block;font-family:'Trebuchet MS',sans-serif;font-size:1.5rem;color:var(--ok)}
+h2{font-size:1.15rem;margin:18px 0 8px}
+.linha{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end}
+label{font-size:.85rem;font-weight:700;display:flex;flex-direction:column;gap:4px;flex:1;min-width:120px}
+input,select{padding:9px;border:1px solid var(--borda);border-radius:8px;font-size:.95rem;width:100%}
+table{width:100%;border-collapse:collapse;font-family:'Trebuchet MS',sans-serif;font-size:.9rem}
+th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--borda)}
+.rolar{overflow-x:auto}
+.erro{color:#b3261e;font-family:'Trebuchet MS',sans-serif;font-size:.85rem;min-height:1.2em;margin-top:6px}
+.vazio{color:var(--suave);padding:8px 0}
+@media(prefers-reduced-motion:no-preference){.prod{transition:transform .15s}.prod:hover{transform:translateY(-3px)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><b>VF</b><span>Plásticos<small>& Utilidades do Lar</small></span></div>
+  <button class="btn-adm" id="abrirAdmin">Área do administrador</button>
+</header>
+
+<section class="hero">
+  <h1>Tudo em plástico e utilidades para sua casa</h1>
+  <p>Baldes, bacias, potes, organizadores e muito mais, com preço bom aqui em Palmácia, CE. Escolha o produto e peça pelo WhatsApp.</p>
+</section>
+
+<main>
+  <div class="filtros" id="filtros"></div>
+  <div class="grade" id="grade"></div>
+</main>
+
+<footer>VFPlásticos & Utilidades do Lar · Palmácia, Ceará</footer>
+
+<!-- Login -->
+<div class="overlay" id="ovLogin">
+  <div class="modal peq">
+    <div class="topo"><h2 style="margin:0">Entrar como admin</h2><button class="btn-s" data-fechar="ovLogin" aria-label="Fechar">X</button></div>
+    <label>Senha<input type="password" id="senha" autocomplete="current-password"></label>
+    <p class="erro" id="erroLogin"></p>
+    <button class="btn-p" id="entrar" style="width:100%">Entrar</button>
+  </div>
+</div>
+
+<!-- Painel admin -->
+<div class="overlay" id="ovAdmin">
+  <div class="modal">
+    <div class="topo"><h2 style="margin:0">Painel do administrador</h2><button class="btn-d" id="sair">Sair</button></div>
+
+    <div class="fat">
+      <div><span>Faturado hoje</span><strong id="fatDia">R$ 0,00</strong></div>
+      <div><span>Faturado no mês</span><strong id="fatMes">R$ 0,00</strong></div>
+    </div>
+
+    <h2>Registrar venda</h2>
+    <div class="linha">
+      <label>Produto<select id="vProd"></select></label>
+      <label style="max-width:110px">Quantidade<input type="number" id="vQtd" min="1" value="1"></label>
+      <button class="btn-p" id="vSalvar">Registrar</button>
+    </div>
+
+    <h2>Vendas de hoje</h2>
+    <div class="rolar"><table><thead><tr><th>Hora</th><th>Produto</th><th>Qtd</th><th>Total</th><th></th></tr></thead><tbody id="vendasHoje"></tbody></table></div>
+
+    <h2>Cadastrar / editar produto</h2>
+    <div class="linha">
+      <label>Nome<input id="pNome"></label>
+      <label>Categoria<input id="pCat" placeholder="Ex.: Cozinha"></label>
+      <label style="max-width:120px">Preço (R$)<input id="pPreco" type="number" step="0.01" min="0"></label>
+    </div>
+    <div class="linha" style="margin-top:8px">
+      <label>Foto do produto<input type="file" id="pFoto" accept="image/*"></label>
+      <button class="btn-p" id="pSalvar">Salvar produto</button>
+      <button class="btn-s" id="pLimpar">Limpar</button>
+    </div>
+    <p class="erro" id="erroProd"></p>
+
+    <h2>Produtos cadastrados</h2>
+    <div class="rolar"><table><thead><tr><th>Produto</th><th>Preço</th><th></th></tr></thead><tbody id="listaProd"></tbody></table></div>
+  </div>
+</div>
+
+<script>
+// ===== CONFIGURAÇÃO — troque estes dois valores =====
+var SENHA_ADMIN = "vf2026admin";      // senha do administrador
+var WHATSAPP = "5588900000000";       // DDI+DDD+número da loja, só números
+
+var CHAVE_PROD = "vf_produtos", CHAVE_VEND = "vf_vendas";
+var PADRAO = [
+  {id:1,nome:"Balde 10 litros",cat:"Limpeza",preco:12.9,emoji:"🪣"},
+  {id:2,nome:"Bacia plástica grande",cat:"Limpeza",preco:15.5,emoji:"🥣"},
+  {id:3,nome:"Kit 5 potes com tampa",cat:"Cozinha",preco:24.9,emoji:"🍱"},
+  {id:4,nome:"Jarra 2 litros",cat:"Cozinha",preco:11.9,emoji:"🫗"},
+  {id:5,nome:"Cesto de roupa",cat:"Lavanderia",preco:29.9,emoji:"🧺"},
+  {id:6,nome:"Vassoura de piaçava",cat:"Limpeza",preco:14.0,emoji:"🧹"},
+  {id:7,nome:"Caixa organizadora 20L",cat:"Organização",preco:34.9,emoji:"📦"},
+  {id:8,nome:"Escorredor de louça",cat:"Cozinha",preco:27.5,emoji:"🍽️"}
+];
+
+function ler(k,pad){try{var v=JSON.parse(localStorage.getItem(k));return v||pad}catch(e){return pad}}
+function gravar(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}
+var produtos = ler(CHAVE_PROD,PADRAO);
+var vendas = ler(CHAVE_VEND,[]);
+var filtro = "Todos", editando = null, fotoNova = null;
+
+function $(id){return document.getElementById(id)}
+function brl(n){return n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
+function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML}
+
+// ===== Loja =====
+function desenharLoja(){
+  var cats=["Todos"];
+  produtos.forEach(function(p){if(cats.indexOf(p.cat)<0)cats.push(p.cat)});
+  $("filtros").innerHTML=cats.map(function(c){
+    return '<button class="'+(c===filtro?"on":"")+'" data-cat="'+esc(c)+'">'+esc(c)+'</button>'}).join("");
+  var lista=produtos.filter(function(p){return filtro==="Todos"||p.cat===filtro});
+  $("grade").innerHTML=lista.length?lista.map(function(p){
+    var foto=p.img?'<img src="'+p.img+'" alt="'+esc(p.nome)+'">':(p.emoji||"🛍️");
+    var msg=encodeURIComponent("Olá! Quero o produto: "+p.nome+" ("+brl(p.preco)+")");
+    return '<article class="prod"><div class="foto">'+foto+'</div><div class="info"><span class="cat">'+esc(p.cat)+'</span><h3>'+esc(p.nome)+'</h3><span class="preco">'+brl(p.preco)+'</span><a href="https://wa.me/'+WHATSAPP+'?text='+msg+'" target="_blank" rel="noopener">Pedir no WhatsApp</a></div></article>'
+  }).join(""):'<p class="vazio">Nenhum produto nesta categoria.</p>';
+}
+$("filtros").addEventListener("click",function(e){
+  if(e.target.dataset.cat){filtro=e.target.dataset.cat;desenharLoja()}});
+
+// ===== Admin: acesso =====
+function abrir(id){$(id).classList.add("on")}
+function fechar(id){$(id).classList.remove("on")}
+document.querySelectorAll("[data-fechar]").forEach(function(b){b.onclick=function(){fechar(b.dataset.fechar)}});
+$("abrirAdmin").onclick=function(){
+  if(sessionStorage.getItem("vf_admin")==="1"){abrirPainel()}else{$("senha").value="";$("erroLogin").textContent="";abrir("ovLogin");$("senha").focus()}};
+function tentarEntrar(){
+  if($("senha").value===SENHA_ADMIN){sessionStorage.setItem("vf_admin","1");fechar("ovLogin");abrirPainel()}
+  else{$("erroLogin").textContent="Senha incorreta."}}
+$("entrar").onclick=tentarEntrar;
+$("senha").onkeydown=function(e){if(e.key==="Enter")tentarEntrar()};
+$("sair").onclick=function(){sessionStorage.removeItem("vf_admin");fechar("ovAdmin")};
+function abrirPainel(){desenharPainel();abrir("ovAdmin")}
+
+// ===== Admin: faturamento =====
+function chaveDia(d){return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()}
+function desenharPainel(){
+  var hoje=new Date(),dia=0,mes=0,linhas="";
+  vendas.forEach(function(v){
+    var d=new Date(v.data);
+    if(d.getFullYear()===hoje.getFullYear()&&d.getMonth()===hoje.getMonth()){
+      mes+=v.total;
+      if(chaveDia(d)===chaveDia(hoje)){
+        dia+=v.total;
+        linhas+='<tr><td>'+d.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})+'</td><td>'+esc(v.nome)+'</td><td>'+v.qtd+'</td><td>'+brl(v.total)+'</td><td><button class="btn-d" data-delv="'+v.id+'">Excluir</button></td></tr>'}}});
+  $("fatDia").textContent=brl(dia);$("fatMes").textContent=brl(mes);
+  $("vendasHoje").innerHTML=linhas||'<tr><td colspan="5" class="vazio">Nenhuma venda registrada hoje.</td></tr>';
+  $("vProd").innerHTML=produtos.map(function(p){return '<option value="'+p.id+'">'+esc(p.nome)+' — '+brl(p.preco)+'</option>'}).join("");
+  $("listaProd").innerHTML=produtos.map(function(p){
+    return '<tr><td>'+esc(p.nome)+'</td><td>'+brl(p.preco)+'</td><td><button class="btn-s" data-edit="'+p.id+'">Editar</button> <button class="btn-d" data-delp="'+p.id+'">Excluir</button></td></tr>'}).join("");
+}
+$("vSalvar").onclick=function(){
+  var p=produtos.filter(function(x){return x.id==$("vProd").value})[0],q=parseInt($("vQtd").value,10);
+  if(!p||!(q>0))return;
+  vendas.push({id:Date.now(),data:new Date().toISOString(),nome:p.nome,qtd:q,total:+(p.preco*q).toFixed(2)});
+  gravar(CHAVE_VEND,vendas);$("vQtd").value=1;desenharPainel()};
+$("vendasHoje").onclick=function(e){
+  var id=e.target.dataset.delv;if(!id)return;
+  vendas=vendas.filter(function(v){return String(v.id)!==id});gravar(CHAVE_VEND,vendas);desenharPainel()};
+
+// ===== Admin: produtos =====
+function limparForm(){editando=null;fotoNova=null;["pNome","pCat","pPreco","pFoto"].forEach(function(i){$(i).value=""});$("erroProd").textContent=""}
+$("pLimpar").onclick=limparForm;
+$("pFoto").onchange=function(){
+  var f=this.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(){var im=new Image();im.onload=function(){
+    var m=Math.min(1,500/Math.max(im.width,im.height)),c=document.createElement("canvas");
+    c.width=im.width*m;c.height=im.height*m;c.getContext("2d").drawImage(im,0,0,c.width,c.height);
+    fotoNova=c.toDataURL("image/jpeg",0.75)};im.src=r.result};
+  r.readAsDataURL(f)};
+$("pSalvar").onclick=function(){
+  var nome=$("pNome").value.trim(),cat=$("pCat").value.trim()||"Geral",preco=parseFloat($("pPreco").value);
+  if(!nome||!(preco>=0)){$("erroProd").textContent="Informe o nome e o preço do produto.";return}
+  if(editando){produtos.forEach(function(p){if(p.id===editando){p.nome=nome;p.cat=cat;p.preco=preco;if(fotoNova)p.img=fotoNova}})}
+  else{produtos.push({id:Date.now(),nome:nome,cat:cat,preco:preco,img:fotoNova||null})}
+  if(!gravar(CHAVE_PROD,produtos)){$("erroProd").textContent="Memória cheia: use fotos menores.";return}
+  limparForm();desenharPainel();desenharLoja()};
+$("listaProd").onclick=function(e){
+  var ed=e.target.dataset.edit,dl=e.target.dataset.delp;
+  if(ed){var p=produtos.filter(function(x){return String(x.id)===ed})[0];
+    editando=p.id;$("pNome").value=p.nome;$("pCat").value=p.cat;$("pPreco").value=p.preco;$("pNome").focus()}
+  if(dl&&confirm("Excluir este produto?")){
+    produtos=produtos.filter(function(x){return String(x.id)!==dl});gravar(CHAVE_PROD,produtos);desenharPainel();desenharLoja()}};
+
+desenharLoja();
+</script>
+</body>
+</html>
