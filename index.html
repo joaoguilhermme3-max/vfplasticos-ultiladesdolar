@@ -4,40 +4,80 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VFPlásticos & Utilidades do Lar</title>
+<meta name="description" content="VFPlásticos & Utilidades do Lar em Palmácia, CE: baldes, bacias, potes, organizadores e utilidades domésticas.">
 <style>
-:root{--azul:#1456f0;--azul-esc:#0b2f8a;--laranja:#ff7a1a;--fundo:#f4f7ff;--card:#fff;--texto:#14213d;--suave:#5b6785;--borda:#dbe3f5;--ok:#0f9d58}
+:root{--azul:#1045c0;--azul-esc:#09266e;--azul-claro:#e3eafb;--laranja:#ff7a1a;--laranja-esc:#e8650a;--fundo:#f3f6fd;--card:#fff;--texto:#14213d;--suave:#5b6785;--borda:#d9e1f4;--ok:#0f9d58}
 *{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
 body{font-family:Georgia,'Times New Roman',serif;background:var(--fundo);color:var(--texto);line-height:1.5}
-h1,h2,h3,button,input,select,label,.preco{font-family:'Trebuchet MS',Verdana,sans-serif}
-header{background:var(--azul);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:5}
-.logo{display:flex;align-items:center;gap:10px;font-family:'Trebuchet MS',sans-serif;font-weight:800;font-size:1.15rem}
-.logo b{background:#fff;color:#d62828;border-radius:8px;padding:2px 9px}
-.logo small{display:block;font-weight:400;font-size:.75rem;opacity:.85}
+h1,h2,h3,button,input,select,label,.preco,nav a,.topbar,.wpp{font-family:'Trebuchet MS',Verdana,sans-serif}
 button{cursor:pointer;border:0;border-radius:8px;padding:10px 16px;font-size:.95rem;font-weight:700}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--laranja);outline-offset:2px}
-.btn-adm{background:rgba(255,255,255,.18);color:#fff}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--laranja);outline-offset:2px}
 .btn-p{background:var(--laranja);color:#fff}
+.btn-p:hover{background:var(--laranja-esc)}
 .btn-s{background:#e6ecfb;color:var(--azul-esc)}
 .btn-d{background:#fde6e6;color:#b3261e}
-.hero{padding:44px 20px 28px;max-width:960px;margin:auto}
-.hero h1{font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.1;max-width:15ch}
-.hero p{color:var(--suave);margin-top:10px;max-width:52ch}
-main{max-width:1100px;margin:auto;padding:0 20px 60px}
-.filtros{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 20px}
-.filtros button{background:#e6ecfb;color:var(--azul-esc)}
-.filtros button.on{background:var(--azul);color:#fff}
-.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
-.prod{background:var(--card);border:1px solid var(--borda);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
-.foto{aspect-ratio:1/1;background:#e9efff;display:flex;align-items:center;justify-content:center;font-size:4rem}
+
+/* ===== Header ===== */
+.topbar{background:var(--azul-esc);color:#cfd9f7;font-size:.8rem;padding:7px 20px}
+.topbar div{max-width:1100px;margin:auto;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header{background:var(--azul);color:#fff;position:sticky;top:0;z-index:10;box-shadow:0 2px 14px rgba(9,38,110,.35)}
+.cab{max-width:1100px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:22px}
+.logo{display:flex;align-items:center;gap:11px;color:#fff;text-decoration:none;flex-shrink:0}
+.logo b{background:#fff;color:#d62828;border-radius:10px;padding:5px 11px;font-size:1.25rem;font-weight:800;font-family:'Trebuchet MS',sans-serif;letter-spacing:.5px}
+.logo span{font-family:'Trebuchet MS',sans-serif;font-weight:800;font-size:1.1rem;line-height:1.15}
+.logo small{display:block;font-weight:400;font-size:.72rem;opacity:.85}
+nav{display:flex;gap:4px}
+nav a{color:#fff;text-decoration:none;font-weight:700;font-size:.92rem;padding:8px 12px;border-radius:8px}
+nav a:hover{background:rgba(255,255,255,.14)}
+.busca{flex:1;min-width:140px;position:relative}
+.busca svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:17px;height:17px;stroke:var(--suave);fill:none;stroke-width:2}
+.busca input{width:100%;padding:11px 14px 11px 38px;border:0;border-radius:999px;font-size:.92rem;background:#fff;color:var(--texto)}
+.acoes{display:flex;gap:8px;flex-shrink:0}
+.wpp{background:var(--laranja);color:#fff;text-decoration:none;font-weight:700;font-size:.9rem;padding:10px 16px;border-radius:999px;display:inline-block}
+.wpp:hover{background:var(--laranja-esc)}
+.btn-adm{background:rgba(255,255,255,.16);color:#fff;border-radius:999px;font-size:.9rem}
+.btn-adm:hover{background:rgba(255,255,255,.26)}
+
+/* ===== Hero ===== */
+.hero{background:linear-gradient(135deg,var(--azul-esc) 0%,var(--azul) 100%);color:#fff;padding:56px 20px 60px}
+.hero-in{max-width:1100px;margin:auto}
+.hero h1{font-size:clamp(2rem,5.5vw,3.2rem);line-height:1.08;max-width:16ch}
+.hero p{margin-top:14px;max-width:50ch;color:#d6e0fa;font-size:1.05rem}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.hero-btns a{text-decoration:none;font-family:'Trebuchet MS',sans-serif;font-weight:700;padding:13px 22px;border-radius:999px}
+.hero-btns .claro{background:#fff;color:var(--azul-esc)}
+
+/* ===== Catálogo ===== */
+main{max-width:1100px;margin:auto;padding:36px 20px 60px}
+.titulo{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.titulo h2{font-size:1.6rem;margin:0}
+.titulo span{color:var(--suave);font-size:.9rem;font-family:'Trebuchet MS',sans-serif}
+.filtros{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.filtros button{background:#fff;color:var(--azul-esc);border:1px solid var(--borda);border-radius:999px;padding:8px 16px}
+.filtros button.on{background:var(--azul);color:#fff;border-color:var(--azul)}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.prod{background:var(--card);border:1px solid var(--borda);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(9,38,110,.06)}
+.foto{aspect-ratio:1/1;background:var(--azul-claro);display:flex;align-items:center;justify-content:center;font-size:4rem}
 .foto img{width:100%;height:100%;object-fit:cover}
-.info{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.info{padding:15px;display:flex;flex-direction:column;gap:6px;flex:1}
 .info h3{font-size:1rem}
 .cat{font-size:.8rem;color:var(--suave)}
-.preco{font-size:1.25rem;font-weight:800;color:var(--azul)}
-.info a{margin-top:auto;text-align:center;text-decoration:none;background:var(--laranja);color:#fff;padding:10px;border-radius:8px;font-family:'Trebuchet MS',sans-serif;font-weight:700}
-footer{background:var(--azul-esc);color:#cfd9f7;padding:26px 20px;text-align:center;font-size:.9rem}
-/* admin */
-.overlay{position:fixed;inset:0;background:rgba(10,20,50,.6);display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:20px;z-index:20}
+.preco{font-size:1.3rem;font-weight:800;color:var(--azul)}
+.info a{margin-top:auto;text-align:center;text-decoration:none;background:var(--laranja);color:#fff;padding:11px;border-radius:8px;font-family:'Trebuchet MS',sans-serif;font-weight:700}
+.info a:hover{background:var(--laranja-esc)}
+.vazio{color:var(--suave);padding:8px 0}
+
+/* ===== Rodapé ===== */
+footer{background:var(--azul-esc);color:#cfd9f7;padding:38px 20px 22px}
+.rod{max-width:1100px;margin:auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+footer h3{color:#fff;font-size:1.05rem;margin-bottom:8px}
+footer p{font-size:.92rem;max-width:36ch}
+footer .wpp{margin-top:12px}
+.copy{max-width:1100px;margin:26px auto 0;padding-top:16px;border-top:1px solid rgba(255,255,255,.15);font-size:.8rem;font-family:'Trebuchet MS',sans-serif}
+
+/* ===== Admin ===== */
+.overlay{position:fixed;inset:0;background:rgba(9,20,50,.65);display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:20px;z-index:30}
 .overlay.on{display:flex}
 .modal{background:#fff;border-radius:16px;padding:22px;width:100%;max-width:760px;margin:auto}
 .modal.peq{max-width:360px}
@@ -46,36 +86,79 @@ footer{background:var(--azul-esc);color:#cfd9f7;padding:26px 20px;text-align:cen
 .fat div{background:var(--fundo);border:1px solid var(--borda);border-radius:12px;padding:14px}
 .fat span{font-family:'Trebuchet MS',sans-serif;font-size:.85rem;color:var(--suave)}
 .fat strong{display:block;font-family:'Trebuchet MS',sans-serif;font-size:1.5rem;color:var(--ok)}
-h2{font-size:1.15rem;margin:18px 0 8px}
+.modal h2{font-size:1.15rem;margin:18px 0 8px}
 .linha{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end}
 label{font-size:.85rem;font-weight:700;display:flex;flex-direction:column;gap:4px;flex:1;min-width:120px}
-input,select{padding:9px;border:1px solid var(--borda);border-radius:8px;font-size:.95rem;width:100%}
+.modal input,select{padding:9px;border:1px solid var(--borda);border-radius:8px;font-size:.95rem;width:100%}
 table{width:100%;border-collapse:collapse;font-family:'Trebuchet MS',sans-serif;font-size:.9rem}
 th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--borda)}
 .rolar{overflow-x:auto}
 .erro{color:#b3261e;font-family:'Trebuchet MS',sans-serif;font-size:.85rem;min-height:1.2em;margin-top:6px}
-.vazio{color:var(--suave);padding:8px 0}
-@media(prefers-reduced-motion:no-preference){.prod{transition:transform .15s}.prod:hover{transform:translateY(-3px)}}
+
+@media(max-width:860px){
+  nav{display:none}
+  .cab{flex-wrap:wrap;gap:10px 12px}
+  .busca{order:3;flex-basis:100%}
+  .acoes{margin-left:auto}
+}
+@media(max-width:480px){.topbar .t2{display:none}.wpp{padding:9px 13px}}
+@media(prefers-reduced-motion:no-preference){.prod{transition:transform .15s,box-shadow .15s}.prod:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(9,38,110,.12)}}
 </style>
 </head>
 <body>
 
+<div class="topbar"><div><span>Palmácia, Ceará</span><span class="t2">Peça pelo WhatsApp e retire na loja</span></div></div>
+
 <header>
-  <div class="logo"><b>VF</b><span>Plásticos<small>& Utilidades do Lar</small></span></div>
-  <button class="btn-adm" id="abrirAdmin">Área do administrador</button>
+  <div class="cab">
+    <a class="logo" href="#inicio" aria-label="VFPlásticos, início"><b>VF</b><span>Plásticos<small>& Utilidades do Lar</small></span></a>
+    <nav aria-label="Principal">
+      <a href="#inicio">Início</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div class="busca">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input type="search" id="busca" placeholder="Buscar produto" aria-label="Buscar produto">
+    </div>
+    <div class="acoes">
+      <a class="wpp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+      <button class="btn-adm" id="abrirAdmin">Admin</button>
+    </div>
+  </div>
 </header>
 
-<section class="hero">
-  <h1>Tudo em plástico e utilidades para sua casa</h1>
-  <p>Baldes, bacias, potes, organizadores e muito mais, com preço bom aqui em Palmácia, CE. Escolha o produto e peça pelo WhatsApp.</p>
+<section class="hero" id="inicio">
+  <div class="hero-in">
+    <h1>Tudo em plástico e utilidades para sua casa</h1>
+    <p>Baldes, bacias, potes, organizadores e muito mais, com preço bom aqui em Palmácia, CE. Escolha o produto e peça pelo WhatsApp.</p>
+    <div class="hero-btns">
+      <a class="claro" href="#produtos">Ver produtos</a>
+      <a class="btn-p wpp" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </div>
+  </div>
 </section>
 
-<main>
+<main id="produtos">
+  <div class="titulo"><h2>Nossos produtos</h2><span id="contador"></span></div>
   <div class="filtros" id="filtros"></div>
   <div class="grade" id="grade"></div>
 </main>
 
-<footer>VFPlásticos & Utilidades do Lar · Palmácia, Ceará</footer>
+<footer id="contato">
+  <div class="rod">
+    <div>
+      <h3>VFPlásticos & Utilidades do Lar</h3>
+      <p>Plásticos e utilidades domésticas em Palmácia, Ceará.</p>
+    </div>
+    <div>
+      <h3>Fale com a gente</h3>
+      <p>Tire dúvidas e faça seu pedido pelo WhatsApp.</p>
+      <a class="wpp" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+    </div>
+  </div>
+  <div class="copy">© <span id="ano"></span> VFPlásticos & Utilidades do Lar. Todos os direitos reservados.</div>
+</footer>
 
 <!-- Login -->
 <div class="overlay" id="ovLogin">
@@ -146,11 +229,16 @@ function ler(k,pad){try{var v=JSON.parse(localStorage.getItem(k));return v||pad}
 function gravar(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}
 var produtos = ler(CHAVE_PROD,PADRAO);
 var vendas = ler(CHAVE_VEND,[]);
-var filtro = "Todos", editando = null, fotoNova = null;
+var filtro = "Todos", termo = "", editando = null, fotoNova = null;
 
 function $(id){return document.getElementById(id)}
 function brl(n){return n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
 function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML}
+function semAcento(s){return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
+
+// links do WhatsApp (cabeçalho, hero e rodapé)
+document.querySelectorAll("a.wpp").forEach(function(a){a.href="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent("Olá! Vim pelo site da VFPlásticos.")});
+$("ano").textContent=new Date().getFullYear();
 
 // ===== Loja =====
 function desenharLoja(){
@@ -158,15 +246,21 @@ function desenharLoja(){
   produtos.forEach(function(p){if(cats.indexOf(p.cat)<0)cats.push(p.cat)});
   $("filtros").innerHTML=cats.map(function(c){
     return '<button class="'+(c===filtro?"on":"")+'" data-cat="'+esc(c)+'">'+esc(c)+'</button>'}).join("");
-  var lista=produtos.filter(function(p){return filtro==="Todos"||p.cat===filtro});
+  var t=semAcento(termo.trim());
+  var lista=produtos.filter(function(p){
+    return (filtro==="Todos"||p.cat===filtro)&&(!t||semAcento(p.nome+" "+p.cat).indexOf(t)>=0)});
+  $("contador").textContent=lista.length+(lista.length===1?" produto":" produtos");
   $("grade").innerHTML=lista.length?lista.map(function(p){
     var foto=p.img?'<img src="'+p.img+'" alt="'+esc(p.nome)+'">':(p.emoji||"🛍️");
     var msg=encodeURIComponent("Olá! Quero o produto: "+p.nome+" ("+brl(p.preco)+")");
     return '<article class="prod"><div class="foto">'+foto+'</div><div class="info"><span class="cat">'+esc(p.cat)+'</span><h3>'+esc(p.nome)+'</h3><span class="preco">'+brl(p.preco)+'</span><a href="https://wa.me/'+WHATSAPP+'?text='+msg+'" target="_blank" rel="noopener">Pedir no WhatsApp</a></div></article>'
-  }).join(""):'<p class="vazio">Nenhum produto nesta categoria.</p>';
+  }).join(""):'<p class="vazio">Nenhum produto encontrado.</p>';
 }
 $("filtros").addEventListener("click",function(e){
   if(e.target.dataset.cat){filtro=e.target.dataset.cat;desenharLoja()}});
+$("busca").addEventListener("input",function(){
+  termo=this.value;desenharLoja();
+  if(termo)$("produtos").scrollIntoView()});
 
 // ===== Admin: acesso =====
 function abrir(id){$(id).classList.add("on")}
