@@ -91,6 +91,7 @@ label{font-size:.85rem;font-weight:700;display:flex;flex-direction:column;gap:4p
 table{width:100%;border-collapse:collapse;font-family:'Trebuchet MS',sans-serif;font-size:.9rem}
 th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--borda)}
 .rolar{overflow-x:auto}
+.dica{margin-top:18px;font-family:'Trebuchet MS',sans-serif;font-size:.85rem;color:var(--suave);background:var(--fundo);border:1px solid var(--borda);border-radius:10px;padding:10px 12px}
 .erro{color:#b3261e;font-family:'Trebuchet MS',sans-serif;font-size:.85rem;min-height:1.2em;margin-top:6px}
 
 @media(max-width:860px){
@@ -193,21 +194,7 @@ th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--borda)}
     <h2>Vendas de hoje</h2>
     <div class="rolar"><table><thead><tr><th>Hora</th><th>Produto</th><th>Qtd</th><th>Total</th><th></th></tr></thead><tbody id="vendasHoje"></tbody></table></div>
 
-    <h2>Cadastrar / editar produto</h2>
-    <div class="linha">
-      <label>Nome<input id="pNome"></label>
-      <label>Categoria<input id="pCat" placeholder="Ex.: Cozinha"></label>
-      <label style="max-width:120px">Preço (R$)<input id="pPreco" type="number" step="0.01" min="0"></label>
-    </div>
-    <div class="linha" style="margin-top:8px">
-      <label>Foto do produto<input type="file" id="pFoto" accept="image/*"></label>
-      <button class="btn-p" id="pSalvar">Salvar produto</button>
-      <button class="btn-s" id="pLimpar">Limpar</button>
-    </div>
-    <p class="erro" id="erroProd"></p>
-
-    <h2>Produtos cadastrados</h2>
-    <div class="rolar"><table><thead><tr><th>Produto</th><th>Preço</th><th></th></tr></thead><tbody id="listaProd"></tbody></table></div>
+    <p class="dica">Para incluir ou alterar produtos e fotos, edite a lista PRODUTOS no index.html e envie a foto para a pasta img do repositório.</p>
   </div>
 </div>
 
@@ -216,21 +203,26 @@ th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--borda)}
 var SENHA_ADMIN = "vf2026admin";      // senha do administrador
 var WHATSAPP = "5588900000000";       // DDI+DDD+número da loja, só números
 
-var CHAVE_PROD = "vf_produtos", CHAVE_VEND = "vf_vendas";
-var PADRAO = [
-  {id:1,nome:"Balde 10 litros",cat:"Limpeza",preco:12.9,emoji:"🪣"},
-  {id:2,nome:"Bacia plástica grande",cat:"Limpeza",preco:15.5,emoji:"🥣"},
-  {id:3,nome:"Kit 5 potes com tampa",cat:"Cozinha",preco:24.9,emoji:"🍱"},
-  {id:4,nome:"Jarra 2 litros",cat:"Cozinha",preco:11.9,emoji:"🫗"},
-  {id:5,nome:"Cesto de roupa",cat:"Lavanderia",preco:29.9,emoji:"🧺"},
-  {id:6,nome:"Vassoura de piaçava",cat:"Limpeza",preco:14.0,emoji:"🧹"},
-  {id:7,nome:"Caixa organizadora 20L",cat:"Organização",preco:34.9,emoji:"📦"},
-  {id:8,nome:"Escorredor de louça",cat:"Cozinha",preco:27.5,emoji:"🍽️"}
+var CHAVE_VEND = "vf_vendas";
+
+// ===== CATÁLOGO =====
+// Para trocar uma foto: salve a imagem na pasta "img" do repositório com o mesmo nome.
+// Para novo produto: copie uma linha, mude id, nome, categoria, preço e foto.
+// Enquanto a foto não existir, aparece o emoji no lugar.
+var PRODUTOS = [
+  {id:1,nome:"Balde 10 litros",cat:"Limpeza",preco:12.9,emoji:"🪣",img:"img/balde-10-litros.jpg"},
+  {id:2,nome:"Bacia plástica grande",cat:"Limpeza",preco:15.5,emoji:"🥣",img:"img/bacia-grande.jpg"},
+  {id:3,nome:"Kit 5 potes com tampa",cat:"Cozinha",preco:24.9,emoji:"🍱",img:"img/kit-potes.jpg"},
+  {id:4,nome:"Jarra 2 litros",cat:"Cozinha",preco:11.9,emoji:"🫗",img:"img/jarra-2-litros.jpg"},
+  {id:5,nome:"Cesto de roupa",cat:"Lavanderia",preco:29.9,emoji:"🧺",img:"img/cesto-de-roupa.jpg"},
+  {id:6,nome:"Vassoura de piaçava",cat:"Limpeza",preco:14.0,emoji:"🧹",img:"img/vassoura-piacava.jpg"},
+  {id:7,nome:"Caixa organizadora 20L",cat:"Organização",preco:34.9,emoji:"📦",img:"img/caixa-organizadora-20l.jpg"},
+  {id:8,nome:"Escorredor de louça",cat:"Cozinha",preco:27.5,emoji:"🍽️",img:"img/escorredor-de-louca.jpg"}
 ];
 
 function ler(k,pad){try{var v=JSON.parse(localStorage.getItem(k));return v||pad}catch(e){return pad}}
 function gravar(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}
-var produtos = ler(CHAVE_PROD,PADRAO);
+var produtos = PRODUTOS;
 var vendas = ler(CHAVE_VEND,[]);
 var filtro = "Todos", termo = "", editando = null, fotoNova = null;
 
@@ -254,11 +246,13 @@ function desenharLoja(){
     return (filtro==="Todos"||p.cat===filtro)&&(!t||semAcento(p.nome+" "+p.cat).indexOf(t)>=0)});
   $("contador").textContent=lista.length+(lista.length===1?" produto":" produtos");
   $("grade").innerHTML=lista.length?lista.map(function(p){
-    var foto=p.img?'<img src="'+p.img+'" alt="'+esc(p.nome)+'">':(p.emoji||"🛍️");
+    var foto=p.img?'<img src="'+p.img+'" alt="'+esc(p.nome)+'" loading="lazy" data-e="'+(p.emoji||"🛍️")+'">':(p.emoji||"🛍️");
     var msg=encodeURIComponent("Olá! Quero o produto: "+p.nome+" ("+brl(p.preco)+")");
     return '<article class="prod"><div class="foto">'+foto+'</div><div class="info"><span class="cat">'+esc(p.cat)+'</span><h3>'+esc(p.nome)+'</h3><span class="preco">'+brl(p.preco)+'</span><a href="https://wa.me/'+WHATSAPP+'?text='+msg+'" target="_blank" rel="noopener">Pedir no WhatsApp</a></div></article>'
   }).join(""):'<p class="vazio">Nenhum produto encontrado.</p>';
 }
+$("grade").addEventListener("error",function(e){
+  if(e.target.tagName==="IMG"){e.target.parentNode.textContent=e.target.dataset.e}},true);
 $("filtros").addEventListener("click",function(e){
   if(e.target.dataset.cat){filtro=e.target.dataset.cat;desenharLoja()}});
 $("busca").addEventListener("input",function(){
@@ -293,8 +287,6 @@ function desenharPainel(){
   $("fatDia").textContent=brl(dia);$("fatMes").textContent=brl(mes);
   $("vendasHoje").innerHTML=linhas||'<tr><td colspan="5" class="vazio">Nenhuma venda registrada hoje.</td></tr>';
   $("vProd").innerHTML=produtos.map(function(p){return '<option value="'+p.id+'">'+esc(p.nome)+' — '+brl(p.preco)+'</option>'}).join("");
-  $("listaProd").innerHTML=produtos.map(function(p){
-    return '<tr><td>'+esc(p.nome)+'</td><td>'+brl(p.preco)+'</td><td><button class="btn-s" data-edit="'+p.id+'">Editar</button> <button class="btn-d" data-delp="'+p.id+'">Excluir</button></td></tr>'}).join("");
 }
 $("vSalvar").onclick=function(){
   var p=produtos.filter(function(x){return x.id==$("vProd").value})[0],q=parseInt($("vQtd").value,10);
@@ -304,31 +296,6 @@ $("vSalvar").onclick=function(){
 $("vendasHoje").onclick=function(e){
   var id=e.target.dataset.delv;if(!id)return;
   vendas=vendas.filter(function(v){return String(v.id)!==id});gravar(CHAVE_VEND,vendas);desenharPainel()};
-
-// ===== Admin: produtos =====
-function limparForm(){editando=null;fotoNova=null;["pNome","pCat","pPreco","pFoto"].forEach(function(i){$(i).value=""});$("erroProd").textContent=""}
-$("pLimpar").onclick=limparForm;
-$("pFoto").onchange=function(){
-  var f=this.files[0];if(!f)return;
-  var r=new FileReader();
-  r.onload=function(){var im=new Image();im.onload=function(){
-    var m=Math.min(1,500/Math.max(im.width,im.height)),c=document.createElement("canvas");
-    c.width=im.width*m;c.height=im.height*m;c.getContext("2d").drawImage(im,0,0,c.width,c.height);
-    fotoNova=c.toDataURL("image/jpeg",0.75)};im.src=r.result};
-  r.readAsDataURL(f)};
-$("pSalvar").onclick=function(){
-  var nome=$("pNome").value.trim(),cat=$("pCat").value.trim()||"Geral",preco=parseFloat($("pPreco").value);
-  if(!nome||!(preco>=0)){$("erroProd").textContent="Informe o nome e o preço do produto.";return}
-  if(editando){produtos.forEach(function(p){if(p.id===editando){p.nome=nome;p.cat=cat;p.preco=preco;if(fotoNova)p.img=fotoNova}})}
-  else{produtos.push({id:Date.now(),nome:nome,cat:cat,preco:preco,img:fotoNova||null})}
-  if(!gravar(CHAVE_PROD,produtos)){$("erroProd").textContent="Memória cheia: use fotos menores.";return}
-  limparForm();desenharPainel();desenharLoja()};
-$("listaProd").onclick=function(e){
-  var ed=e.target.dataset.edit,dl=e.target.dataset.delp;
-  if(ed){var p=produtos.filter(function(x){return String(x.id)===ed})[0];
-    editando=p.id;$("pNome").value=p.nome;$("pCat").value=p.cat;$("pPreco").value=p.preco;$("pNome").focus()}
-  if(dl&&confirm("Excluir este produto?")){
-    produtos=produtos.filter(function(x){return String(x.id)!==dl});gravar(CHAVE_PROD,produtos);desenharPainel();desenharLoja()}};
 
 $("busca").value="";
 desenharLoja();
